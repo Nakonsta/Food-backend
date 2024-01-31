@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       Recipe.belongsToMany(models.Tag, { through: 'RecipeTags' });
       Recipe.belongsToMany(models.Ingredient, { through: 'RecipeIngredients' });
       Recipe.belongsTo(models.Category);
-      Recipe.hasMany(sequelize.define('RecipeIngredient'));
+      Recipe.hasMany(models.RecipeSteps);
+      // Recipe.hasMany(sequelize.define('RecipeIngredients'));
     }
   }
   Recipe.init(

@@ -18,7 +18,7 @@ async function getRecipe(req, res) {
   const id = req.params.id;
 
   const rec = await models.Recipe.findByPk(id, {
-    include: [models.Tag, models.Category, models.RecipeIngredient],
+    include: [models.Tag, models.Category, models.RecipeIngredients],
   });
 
   res.status(200).json({
@@ -87,8 +87,8 @@ async function createRecipe(req, res) {
             await processArray(recipeTagsIds);
           }
 
-          if (req.body.ingredientsIds) {
-            const ingredientsIds = JSON.parse(req.body.ingredientsIds);
+          if (req.body.ingredients) {
+            const ingredients = JSON.parse(req.body.ingredients);
 
             async function processArray(array) {
               for (const item of array) {
@@ -98,14 +98,35 @@ async function createRecipe(req, res) {
                   measureId: item.measureId,
                   amount: item.amount,
                 };
-                await models.RecipeIngredient.create(ingredient, {
+                await models.RecipeIngredients.create(ingredient, {
                   fields: ['recipeId', 'ingredientId', 'measureId', 'amount'],
                   transaction: t,
                 });
               }
             }
 
-            await processArray(ingredientsIds);
+            await processArray(ingredients);
+          }
+
+          if (req.body.steps) {
+            const steps = JSON.parse(req.body.steps);
+            console.log(steps);
+            async function processArray(array) {
+              for (const item of array) {
+                const step = {
+                  recipeId,
+                  stepNumber: item.stepNumber,
+                  stepText: item.description,
+                };
+                console.log('step', step);
+                await models.RecipeSteps.create(step, {
+                  fields: ['recipeId', 'stepNumber', 'stepText'],
+                  transaction: t,
+                });
+              }
+            }
+
+            await processArray(steps);
           }
 
           res.status(201).json({
