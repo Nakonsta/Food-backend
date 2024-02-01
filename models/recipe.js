@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Recipe.belongsToMany(models.Ingredient, { through: 'RecipeIngredients' });
       Recipe.belongsTo(models.Category);
       Recipe.hasMany(models.RecipeSteps);
-      // Recipe.hasMany(sequelize.define('RecipeIngredients'));
+      Recipe.hasMany(sequelize.define('RecipeIngredients'));
     }
   }
   Recipe.init(

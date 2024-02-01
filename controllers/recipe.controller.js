@@ -24,30 +24,6 @@ async function getRecipe(req, res) {
   res.status(200).json({
     data: rec,
   });
-
-  // models.Recipe.findOne({
-  //   where: {
-  //     id: id,
-  //   },
-  //   include: {
-  //     model: models.Tag,
-  //   },
-  // })
-  //   .then((result) => {
-  //     if (result) {
-  //       res.status(200).json(result);
-  //     } else {
-  //       res.status(500).json({
-  //         message: 'Recipe not found',
-  //       });
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     res.status(500).json({
-  //       message: 'Something went wrong',
-  //       error: error,
-  //     });
-  //   });
 }
 
 async function createRecipe(req, res) {
@@ -140,19 +116,6 @@ async function createRecipe(req, res) {
           await t.rollback();
         }
       }
-
-      // if (recipeId) {
-      //   if (req.body.tags) {
-      //     const recipeTagsIds = JSON.parse(req.body.tagsIds);
-      //     const tag = {
-      //       recipeId,
-      //       tagId: recipeTagsIds[0],
-      //     };
-      //     models.RecipeTags.create(tag, {
-      //       fields: ['recipeId', 'tagId'],
-      //     });
-      //   }
-      // }
     })
     .catch((error) => {
       res.status(500).json({
@@ -190,21 +153,40 @@ function updateRecipe(req, res) {
     });
 }
 
-function deleteRecipe(req, res) {
+async function deleteRecipe(req, res) {
   const id = req.params.id;
 
-  models.Recipe.destroy({ where: { id: id } })
-    .then((result) => {
-      res.status(200).json({
-        message: 'Recipe deleted successfully',
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'Something went wrong',
-        error: error,
-      });
+  if (!id) return;
+
+  const t = await sequelize.transaction();
+
+  try {
+    await models.Recipe.destroy({ where: { id: id }, transaction: t });
+    await models.RecipeTags.destroy({
+      where: { recipeId: id },
+      transaction: t,
     });
+    await models.RecipeIngredients.destroy({
+      where: { recipeId: id },
+      transaction: t,
+    });
+    await models.RecipeSteps.destroy({
+      where: { recipeId: id },
+      transaction: t,
+    });
+
+    res.status(200).json({
+      message: `Recipe with id ${id} deleted successfully`,
+    });
+
+    await t.commit();
+  } catch (err) {
+    res.status(500).json({
+      message: 'Something went wrong',
+      error: error,
+    });
+    await t.rollback();
+  }
 }
 
 module.exports = {
