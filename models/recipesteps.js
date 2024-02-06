@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
   RecipeSteps.init(
     {
       recipeId: DataTypes.INTEGER,
-      stepId: DataTypes.INTEGER,
       stepNumber: DataTypes.INTEGER,
       stepText: DataTypes.TEXT,
     },

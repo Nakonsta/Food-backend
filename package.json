@@ -4,15 +4,21 @@
   "description": "REST API - Node.js and MySql",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "author": "Anastasiia Egorova",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
+    "fastest-validator": "^1.17.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.9.1",
+    "nodemon": "^3.0.3",
     "save": "^2.9.0",
     "sequelize": "^6.35.2"
   }
