@@ -28,6 +28,5 @@ coverage
 *.sw?
 
 .env
-package-lock.json
 
 /config/config.json
