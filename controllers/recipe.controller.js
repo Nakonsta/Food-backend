@@ -4,7 +4,14 @@ const models = require('../models');
 const constants = require('../utils/constants');
 
 function getAllRecipes(req, res) {
-  models.Recipe.findAll()
+  models.Recipe.findAll({
+    include: [
+      models.RecipeIngredients,
+      models.RecipeSteps,
+      models.Tag,
+      models.Category,
+    ],
+  })
     .then((result) => {
       res.status(200).json(result);
     })
