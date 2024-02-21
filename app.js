@@ -11,7 +11,7 @@ var corsOptions = {
   origin: function (origin, callback) {
     callback(null, true);
   },
-  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
   allowedHeaders: [
