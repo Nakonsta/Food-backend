@@ -179,6 +179,7 @@ async function updateRecipe(req, res) {
   if (!recipeId) return;
 
   const updatedRecipe = {
+    id: recipeId,
     title: req.body.title,
     imageUrl: req.body.image_url,
     categoryId: req.body.category_id,
@@ -189,7 +190,7 @@ async function updateRecipe(req, res) {
   const v = new Validator();
   const validationResponse = v.validate(
     updatedRecipe,
-    constants.recipeValidationScheme
+    constants.recipeUpdatedValidationScheme
   );
 
   if (validationResponse !== true) {

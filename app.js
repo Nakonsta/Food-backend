@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const recipeRoute = require('./routes/recipes');
 const userRoute = require('./routes/user');
 const imageRoute = require('./routes/images');
+const categoryRouter = require('./routes/categories');
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use('/uploads', express.static('uploads'));
 app.use('/recipes', recipeRoute);
 app.use('/user', userRoute);
 app.use('/image', imageRoute);
+app.use('/categories', categoryRouter);
 
 module.exports = app;

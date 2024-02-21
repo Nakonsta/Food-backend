@@ -24,6 +24,20 @@ const constants = {
       optional: false,
     },
   },
+  recipeUpdatedValidationScheme: {
+    id: {
+      type: 'string',
+      optional: false,
+      max: 255,
+    },
+  },
+  categoryValidationScheme: {
+    title: {
+      type: 'string',
+      optional: false,
+      max: 255,
+    },
+  },
 };
 
 module.exports = constants;
