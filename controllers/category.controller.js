@@ -3,7 +3,9 @@ const models = require('../models');
 const constants = require('../utils/constants');
 
 function getAllCategories(req, res) {
-  models.Category.findAll()
+  models.Category.findAll({
+    fields: ['id', 'title', 'color'],
+  })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -18,6 +20,7 @@ function getAllCategories(req, res) {
 async function createCategory(req, res) {
   const category = {
     title: req.body.title,
+    color: req.body.color,
   };
 
   const v = new Validator();
@@ -60,6 +63,7 @@ async function updateCategory(req, res) {
   const updatedCategory = {
     id: categoryId,
     title: req.body.title,
+    color: req.body.color,
   };
 
   const v = new Validator();

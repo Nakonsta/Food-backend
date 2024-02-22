@@ -37,6 +37,10 @@ const constants = {
       optional: false,
       max: 255,
     },
+    color: {
+      type: 'string',
+      optional: false,
+    },
   },
 };
 

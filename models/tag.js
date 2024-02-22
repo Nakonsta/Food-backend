@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Tag.init(
     {
       title: DataTypes.STRING,
+      color: DataTypes.STRING,
     },
     {
       sequelize,
