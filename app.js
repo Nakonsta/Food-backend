@@ -5,6 +5,8 @@ const recipeRoute = require('./routes/recipes');
 const userRoute = require('./routes/user');
 const imageRoute = require('./routes/images');
 const categoryRouter = require('./routes/categories');
+const tagRouter = require('./routes/tags');
+const ingredientRouter = require('./routes/ingredients');
 
 const app = express();
 
@@ -33,5 +35,7 @@ app.use('/recipes', recipeRoute);
 app.use('/user', userRoute);
 app.use('/image', imageRoute);
 app.use('/categories', categoryRouter);
+app.use('/tags', tagRouter);
+app.use('/ingredients', ingredientRouter);
 
 module.exports = app;

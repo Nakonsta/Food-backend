@@ -42,6 +42,24 @@ const constants = {
       optional: false,
     },
   },
+  tagValidationScheme: {
+    title: {
+      type: 'string',
+      optional: false,
+      max: 255,
+    },
+    color: {
+      type: 'string',
+      optional: false,
+    },
+  },
+  ingredientValidationScheme: {
+    title: {
+      type: 'string',
+      optional: false,
+      max: 255,
+    },
+  },
 };
 
 module.exports = constants;

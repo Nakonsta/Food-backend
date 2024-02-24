@@ -2,8 +2,8 @@ const Validator = require('fastest-validator');
 const models = require('../models');
 const constants = require('../utils/constants');
 
-function getAllingredients(req, res) {
-  models.Ingredient.findAll({
+function getAllTags(req, res) {
+  models.Tag.findAll({
     fields: ['id', 'title', 'color'],
   })
     .then((result) => {
@@ -17,17 +17,14 @@ function getAllingredients(req, res) {
     });
 }
 
-async function createIngredient(req, res) {
-  const ingredient = {
+async function createTag(req, res) {
+  const tag = {
     title: req.body.title,
     color: req.body.color,
   };
 
   const v = new Validator();
-  const validationResponse = v.validate(
-    ingredient,
-    constants.ingredientValidationScheme
-  );
+  const validationResponse = v.validate(tag, constants.tagValidationScheme);
 
   if (validationResponse !== true) {
     return res.status(400).json({
@@ -36,14 +33,14 @@ async function createIngredient(req, res) {
     });
   }
 
-  models.Ingredient.create(ingredient)
+  models.Tag.create(tag)
     .then(async (result) => {
-      const ingredientId = result?.dataValues?.id;
+      const tagId = result?.dataValues?.id;
 
-      if (ingredientId) {
+      if (tagId) {
         res.status(201).json({
-          message: 'Ingredient created successfully',
-          ingredient: result,
+          message: 'Tag created successfully',
+          tag: result,
         });
       }
     })
@@ -55,21 +52,21 @@ async function createIngredient(req, res) {
     });
 }
 
-async function updateIngredient(req, res) {
-  const ingredientId = req.params.id;
+async function updateTag(req, res) {
+  const tagId = req.params.id;
 
-  if (!ingredientId) return;
+  if (!tagId) return;
 
-  const updatedIngredient = {
-    id: ingredientId,
+  const updatedTag = {
+    id: tagId,
     title: req.body.title,
     color: req.body.color,
   };
 
   const v = new Validator();
   const validationResponse = v.validate(
-    updatedIngredient,
-    constants.ingredientValidationScheme
+    updatedTag,
+    constants.tagValidationScheme
   );
 
   if (validationResponse !== true) {
@@ -80,18 +77,18 @@ async function updateIngredient(req, res) {
   }
 
   try {
-    const result = await models.Ingredient.update(updatedIngredient, {
-      where: { id: ingredientId },
+    const result = await models.Tag.update(updatedTag, {
+      where: { id: tagId },
     });
 
     if (result && result[0]) {
       res.status(200).json({
-        message: 'Ingredient updated successfully',
-        ingredient: updatedIngredient,
+        message: 'Tag updated successfully',
+        tag: updatedTag,
       });
     } else {
       res.status(404).json({
-        message: `Ingredient with id ${ingredientId} doesn't exist`,
+        message: `Tag with id ${tagId} doesn't exist`,
       });
     }
   } catch (error) {
@@ -102,16 +99,16 @@ async function updateIngredient(req, res) {
   }
 }
 
-async function deleteIngredient(req, res) {
+async function deleteTag(req, res) {
   const id = req.params.id;
 
   if (!id) return;
 
   try {
-    await models.Ingredient.destroy({ where: { id: id } });
+    await models.Tag.destroy({ where: { id: id } });
 
     res.status(200).json({
-      message: `Ingredient with id ${id} deleted successfully`,
+      message: `Tag with id ${id} deleted successfully`,
     });
   } catch (err) {
     res.status(500).json({
@@ -122,8 +119,8 @@ async function deleteIngredient(req, res) {
 }
 
 module.exports = {
-  getAllingredients,
-  createIngredient,
-  updateIngredient,
-  deleteIngredient,
+  getAllTags,
+  createTag,
+  updateTag,
+  deleteTag,
 };
