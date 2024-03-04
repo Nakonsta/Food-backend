@@ -141,7 +141,7 @@ async function createRecipe(req, res) {
                 const step = {
                   recipeId,
                   stepNumber: item.stepNumber,
-                  stepText: item.description,
+                  stepText: item.stepText,
                 };
                 await models.RecipeSteps.create(step, {
                   fields: ['recipeId', 'stepNumber', 'stepText'],
@@ -185,6 +185,7 @@ async function updateRecipe(req, res) {
     categoryId: req.body.category_id,
     description: req.body.description,
     time: req.body.time,
+    tagsIds: req.body.tagsIds,
   };
 
   const v = new Validator();
@@ -285,7 +286,7 @@ async function updateRecipe(req, res) {
               const step = {
                 recipeId,
                 stepNumber: item.stepNumber,
-                stepText: item.description,
+                stepText: item.stepText,
               };
               await models.RecipeSteps.create(step, {
                 fields: ['recipeId', 'stepNumber', 'stepText'],

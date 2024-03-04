@@ -60,6 +60,13 @@ const constants = {
       max: 255,
     },
   },
+  measureValidationScheme: {
+    title: {
+      type: 'string',
+      optional: false,
+      max: 255,
+    },
+  },
 };
 
 module.exports = constants;

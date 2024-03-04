@@ -7,6 +7,7 @@ const imageRoute = require('./routes/images');
 const categoryRouter = require('./routes/categories');
 const tagRouter = require('./routes/tags');
 const ingredientRouter = require('./routes/ingredients');
+const measureRouter = require('./routes/measures');
 
 const app = express();
 
@@ -37,5 +38,6 @@ app.use('/image', imageRoute);
 app.use('/categories', categoryRouter);
 app.use('/tags', tagRouter);
 app.use('/ingredients', ingredientRouter);
+app.use('/measures', measureRouter);
 
 module.exports = app;
