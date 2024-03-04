@@ -4,11 +4,7 @@ const checkAuthMiddleware = require('../middleware/check-auth');
 
 const router = express.Router();
 
-router.get(
-  '/',
-  checkAuthMiddleware.checkAuth,
-  measureController.getAllMeasures
-);
+router.get('/', measureController.getAllMeasures);
 router.post(
   '/',
   checkAuthMiddleware.checkAuth,

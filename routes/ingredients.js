@@ -6,11 +6,7 @@ const checkAuthMiddleware = require('../middleware/check-auth');
 
 const router = express.Router();
 
-router.get(
-  '/',
-  checkAuthMiddleware.checkAuth,
-  ingredientController.getAllingredients
-);
+router.get('/', ingredientController.getAllingredients);
 router.post(
   '/',
   checkAuthMiddleware.checkAuth,
