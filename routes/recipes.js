@@ -4,8 +4,8 @@ const checkAuthMiddleware = require('../middleware/check-auth');
 
 const router = express.Router();
 
-router.get('/', checkAuthMiddleware.checkAuth, recipeController.getAllRecipes);
-router.get('/:id', checkAuthMiddleware.checkAuth, recipeController.getRecipe);
+router.get('/', recipeController.getAllRecipes);
+router.get('/:id', recipeController.getRecipe);
 router.post('/', checkAuthMiddleware.checkAuth, recipeController.createRecipe);
 router.patch(
   '/:id',
