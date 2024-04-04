@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       categoryId: DataTypes.INTEGER,
       description: DataTypes.TEXT,
       time: DataTypes.STRING,
+      isPopular: DataTypes.STRING,
+      portions: DataTypes.STRING,
     },
     {
       sequelize,
