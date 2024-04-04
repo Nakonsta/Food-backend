@@ -59,6 +59,8 @@ async function createRecipe(req, res) {
     categoryId: req.body.category_id,
     description: req.body.description,
     time: req.body.time,
+    portions: req.body.portions,
+    isPopular: req.body.isPopular,
   };
 
   const v = new Validator();
@@ -86,8 +88,6 @@ async function createRecipe(req, res) {
     .then(async (result) => {
       const recipe = {};
       const recipeId = result?.dataValues?.id;
-
-      console.log('recipeId', recipeId);
 
       if (recipeId) {
         const t = await sequelize.transaction();
@@ -186,6 +186,8 @@ async function updateRecipe(req, res) {
     description: req.body.description,
     time: req.body.time,
     tagsIds: req.body.tagsIds,
+    portions: req.body.portions,
+    isPopular: req.body.isPopular,
   };
 
   const v = new Validator();
