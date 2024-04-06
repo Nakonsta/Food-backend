@@ -4,7 +4,7 @@ const constants = require('../utils/constants');
 
 function getAllingredients(req, res) {
   models.Ingredient.findAll({
-    fields: ['id', 'title', 'color'],
+    fields: ['id', 'title', 'color', 'image'],
   })
     .then((result) => {
       res.status(200).json(result);
@@ -21,6 +21,7 @@ async function createIngredient(req, res) {
   const ingredient = {
     title: req.body.title,
     color: req.body.color,
+    image: req.body.image,
   };
 
   const v = new Validator();
@@ -64,6 +65,7 @@ async function updateIngredient(req, res) {
     id: ingredientId,
     title: req.body.title,
     color: req.body.color,
+    image: req.body.image,
   };
 
   const v = new Validator();
