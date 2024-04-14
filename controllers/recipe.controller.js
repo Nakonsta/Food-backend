@@ -61,6 +61,7 @@ async function createRecipe(req, res) {
     time: req.body.time,
     portions: req.body.portions,
     isPopular: req.body.isPopular,
+    gr: req.body.gr,
   };
 
   const v = new Validator();
@@ -188,6 +189,7 @@ async function updateRecipe(req, res) {
     tagsIds: req.body.tagsIds,
     portions: req.body.portions,
     isPopular: req.body.isPopular,
+    gr: req.body.gr,
   };
 
   const v = new Validator();

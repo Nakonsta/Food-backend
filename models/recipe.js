@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       time: DataTypes.STRING,
       isPopular: DataTypes.STRING,
       portions: DataTypes.STRING,
+      gr: DataTypes.STRING,
     },
     {
       sequelize,
